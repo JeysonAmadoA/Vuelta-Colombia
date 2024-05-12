@@ -1,15 +1,46 @@
 package com.uptc.frmw.Entities;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "HISTORIAL_EQUIPOS")
 public class TeamHistory {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "historialGen")
+    @SequenceGenerator(name="historialGen", sequenceName = "HISTORIAL_SEQ", allocationSize = 1)
+    @Column(name="ID_HISTORIAL")
     private Long idHistory;
+
+    @Column(name="EQUIPO_ID", insertable = false, updatable = false)
+    private Long idTeam;
+
+    @Column(name="CORREDOR_ID", insertable = false, updatable = false)
+    private Long idRunner;
+
+    @Column(name="EDICION_ID", insertable = false, updatable = false)
+    private int idEdition;
+
+    @Column(name="FECHA_INGRESO")
     private Date dateAdmission;
 
-    private Long idTeam;
-    private Long idRunner;
-    private int idEdition;
+    @ManyToOne
+    @JoinColumn(name="EDICION_ID", nullable = false)
+    private Edition edition;
+
+    @ManyToOne
+    @JoinColumn(name="EQUIPO_ID", nullable = false)
+    private Team team;
+
+    @ManyToOne
+    @JoinColumn( name="CORREDOR_ID", nullable = false)
+    private Runner runner;
 
     public TeamHistory() {
     }
@@ -20,46 +51,6 @@ public class TeamHistory {
         this.idTeam = idTeam;
         this.idEdition = idEdition;
         this.idRunner = idRunner;
-    }
-
-    public Long getIdHistory() {
-        return idHistory;
-    }
-
-    public void setIdHistory(Long idHistory) {
-        this.idHistory = idHistory;
-    }
-
-    public Date getDateAdmission() {
-        return dateAdmission;
-    }
-
-    public void setDateAdmission(Date dateAdmission) {
-        this.dateAdmission = dateAdmission;
-    }
-
-    public Long getIdTeam() {
-        return idTeam;
-    }
-
-    public void setIdTeam(Long idTeam) {
-        this.idTeam = idTeam;
-    }
-
-    public Long getIdRunner() {
-        return idRunner;
-    }
-
-    public void setIdRunner(Long idRunner) {
-        this.idRunner = idRunner;
-    }
-
-    public int getIdEdition() {
-        return idEdition;
-    }
-
-    public void setIdEdition(int idEdition) {
-        this.idEdition = idEdition;
     }
 
     @Override

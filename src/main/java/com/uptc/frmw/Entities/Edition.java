@@ -1,10 +1,39 @@
 package com.uptc.frmw.Entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "EDICIONES")
 public class Edition {
 
+    @Id
+    @Column(name="ANIO")
     private int anio;
+
+    @Column(name="FECHA_INICIAL")
     private Date startDate;
+
+    @Column(name="FECHA_FINAL")
     private Date endDate;
+
+    @OneToMany(mappedBy = "edition" )
+    @JsonIgnore
+    private List<Stage> stages;
+
+    @OneToMany(mappedBy = "edition")
+    @JsonIgnore
+    private List<Participant> participants;
+
+    @OneToMany(mappedBy = "edition")
+    @JsonIgnore
+    private List<TeamHistory> teamHistoryList;
 
     public Edition() {
     }
@@ -12,30 +41,6 @@ public class Edition {
     public Edition(int anio, Date startDate, Date endDate) {
         this.anio = anio;
         this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
-    public int getAnio() {
-        return anio;
-    }
-
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

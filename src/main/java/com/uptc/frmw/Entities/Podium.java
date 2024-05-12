@@ -1,13 +1,38 @@
 package com.uptc.frmw.Entities;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "PODIOS")
 public class Podium {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "podiumGen")
+    @SequenceGenerator(name="podiumGen", sequenceName = "PODIO_SEQ", allocationSize = 1)
+    @Column(name="ID_PODIO")
     private Long idPodium;
+
+    @Column(name="CORREDOR_ID", insertable = false, updatable = false)
+    private Long idRunner;
+    @Column(name="ETAPA_ID", insertable = false, updatable = false)
+    private Long idStage;
+
+    @Column(name="PUESTO")
     private int position;
+    @Column(name="TIEMPO_MINUTOS")
     private int timeMinutes;
 
-    private Long idRunner;
-    private Long idStage;
+    @ManyToOne
+    @JoinColumn(name="CORREDOR_ID", nullable = false)
+    private Runner runner;
+
+    @ManyToOne
+    @JoinColumn(name="ETAPA_ID", nullable = false)
+    private Stage stage;
 
     public Podium() {
     }
@@ -17,46 +42,6 @@ public class Podium {
         this.position = position;
         this.timeMinutes = timeMinutes;
         this.idRunner = idRunner;
-        this.idStage = idStage;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public Long getIdPodium() {
-        return idPodium;
-    }
-
-    public void setIdPodium(Long idPodium) {
-        this.idPodium = idPodium;
-    }
-
-    public int getTimeMinutes() {
-        return timeMinutes;
-    }
-
-    public void setTimeMinutes(int timeMinutes) {
-        this.timeMinutes = timeMinutes;
-    }
-
-    public Long getIdRunner() {
-        return idRunner;
-    }
-
-    public void setIdRunner(Long idRunner) {
-        this.idRunner = idRunner;
-    }
-
-    public Long getIdStage() {
-        return idStage;
-    }
-
-    public void setIdStage(Long idStage) {
         this.idStage = idStage;
     }
 

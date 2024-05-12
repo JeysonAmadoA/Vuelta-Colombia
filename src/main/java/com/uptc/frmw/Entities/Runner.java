@@ -1,13 +1,41 @@
 package com.uptc.frmw.Entities;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "CORREDORES")
 public class Runner {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "runnerGen")
+    @SequenceGenerator(name="runnerGen", sequenceName = "CORREDOR_SEQ", allocationSize = 1)
+    @Column(name="ID_CORREDOR")
     private Long idRunner;
+
+    @Column(name="NOMBRE_CORREDOR")
     private String nameRunner;
+
+    @Column(name="PAIS_NACIMIENTO")
     private String countryBirth;
+
+    @Column(name="FECHA_NACIMIENTO")
     private Date dateBirth;
+
+    @OneToMany(mappedBy = "runner")
+    @JsonIgnore
+    private List<TeamHistory> teamHistoryList;
+
+    @OneToMany(mappedBy = "runner" )
+    @JsonIgnore
+    private List<Podium> podiumsList;
 
     public Runner() {
     }
@@ -19,37 +47,6 @@ public class Runner {
         this.dateBirth = dateBirth;
     }
 
-    public Long getIdRunner() {
-        return idRunner;
-    }
-
-    public void setIdRunner(Long idRunner) {
-        this.idRunner = idRunner;
-    }
-
-    public String getNameRunner() {
-        return nameRunner;
-    }
-
-    public void setNameRunner(String nameRunner) {
-        this.nameRunner = nameRunner;
-    }
-
-    public String getCountryBirth() {
-        return countryBirth;
-    }
-
-    public void setCountryBirth(String countryBirth) {
-        this.countryBirth = countryBirth;
-    }
-
-    public Date getDateBirth() {
-        return dateBirth;
-    }
-
-    public void setDateBirth(Date dateBirth) {
-        this.dateBirth = dateBirth;
-    }
 
     @Override
     public String toString() {

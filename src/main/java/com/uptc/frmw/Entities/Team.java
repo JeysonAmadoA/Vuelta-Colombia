@@ -1,12 +1,38 @@
 package com.uptc.frmw.Entities;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.sql.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "EQUIPOS")
 public class Team {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamGen")
+    @SequenceGenerator(name="teamGen", sequenceName = "EQUIPO_SEQ", allocationSize = 1)
+    @Column(name="ID_EQUIPO")
     private Long idTeam;
+
+    @Column(name="NOMBRE_EQUIPO")
     private String nameTeam;
+
+    @Column(name="FECHA_FUNDACION")
     private Date dateFundation;
+
+    @OneToMany(mappedBy = "team")
+    @JsonIgnore
+    private List<Participant> participantList;
+
+    @OneToMany(mappedBy = "team")
+    @JsonIgnore
+    private List<TeamHistory> teamHistoryList;
 
     public Team() {
     }
@@ -17,29 +43,6 @@ public class Team {
         this.dateFundation = dateFundation;
     }
 
-    public Long getIdTeam() {
-        return idTeam;
-    }
-
-    public void setIdTeam(Long idTeam) {
-        this.idTeam = idTeam;
-    }
-
-    public String getNameTeam() {
-        return nameTeam;
-    }
-
-    public void setNameTeam(String nameTeam) {
-        this.nameTeam = nameTeam;
-    }
-
-    public Date getDateFundation() {
-        return dateFundation;
-    }
-
-    public void setDateFundation(Date dateFundation) {
-        this.dateFundation = dateFundation;
-    }
 
     @Override
     public String toString() {

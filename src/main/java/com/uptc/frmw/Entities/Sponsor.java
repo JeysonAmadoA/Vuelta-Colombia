@@ -1,9 +1,30 @@
 package com.uptc.frmw.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "PATROCINADORES")
 public class Sponsor {
 
+    @Id
+    @Column(name="NIT")
     private String nit;
+
+    @Column(name="NOMBRE_PATROCINADOR")
     private String nameSponsor;
+
+    @OneToMany(mappedBy = "sponsor")
+    @JsonIgnore
+    private List<Participant> participantsList;
+
+
 
     public Sponsor() {
     }
@@ -13,21 +34,6 @@ public class Sponsor {
         this.nameSponsor = nameSponsor;
     }
 
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public String getNameSponsor() {
-        return nameSponsor;
-    }
-
-    public void setNameSponsor(String nameSponsor) {
-        this.nameSponsor = nameSponsor;
-    }
 
     @Override
     public String toString() {
