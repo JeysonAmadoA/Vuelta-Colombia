@@ -22,7 +22,7 @@ public class Podium {
     private Long idStage;
 
     @Column(name="PUESTO")
-    private int position;
+    private short position;
     @Column(name="TIEMPO_MINUTOS")
     private int timeMinutes;
 
@@ -37,7 +37,7 @@ public class Podium {
     public Podium() {
     }
 
-    public Podium(Long idPodium, int position, int timeMinutes, Long idRunner, Long idStage) {
+    public Podium(Long idPodium, short position, int timeMinutes, Long idRunner, Long idStage) {
         this.idPodium = idPodium;
         this.position = position;
         this.timeMinutes = timeMinutes;

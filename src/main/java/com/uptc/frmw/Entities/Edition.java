@@ -15,7 +15,7 @@ public class Edition {
 
     @Id
     @Column(name="ANIO")
-    private int anio;
+    private short anio;
 
     @Column(name="FECHA_INICIAL")
     private Date startDate;
@@ -38,7 +38,7 @@ public class Edition {
     public Edition() {
     }
 
-    public Edition(int anio, Date startDate, Date endDate) {
+    public Edition(short anio, Date startDate, Date endDate) {
         this.anio = anio;
         this.startDate = startDate;
         this.endDate = endDate;
