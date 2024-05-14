@@ -18,7 +18,7 @@ public class Participant {
     private Long idParticipant;
 
     @Column(name="EDICION_ID", insertable = false, updatable = false)
-    private int idEdition;
+    private short idEdition;
 
     @Column(name="EQUIPO_ID", insertable = false, updatable = false)
     private Long idTeam;
@@ -41,7 +41,7 @@ public class Participant {
     public Participant() {
     }
 
-    public Participant(Long idParticipant, int idEdition, Long idTeam, String idSponsor) {
+    public Participant(Long idParticipant, short idEdition, Long idTeam, String idSponsor) {
         this.idParticipant = idParticipant;
         this.idEdition = idEdition;
         this.idTeam = idTeam;

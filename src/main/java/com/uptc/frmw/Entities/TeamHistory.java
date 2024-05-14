@@ -25,7 +25,7 @@ public class TeamHistory {
     private Long idRunner;
 
     @Column(name="EDICION_ID", insertable = false, updatable = false)
-    private int idEdition;
+    private short idEdition;
 
     @Column(name="FECHA_INGRESO")
     private Date dateAdmission;
@@ -45,7 +45,7 @@ public class TeamHistory {
     public TeamHistory() {
     }
 
-    public TeamHistory(Long idHistory, Date dateAdmission, Long idTeam, int idEdition, Long idRunner) {
+    public TeamHistory(Long idHistory, Date dateAdmission, Long idTeam, short idEdition, Long idRunner) {
         this.idHistory = idHistory;
         this.dateAdmission = dateAdmission;
         this.idTeam = idTeam;

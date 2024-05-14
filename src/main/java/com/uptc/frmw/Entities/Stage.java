@@ -33,7 +33,7 @@ public class Stage {
 
 
     @Column(name="EDICION_ID", insertable = false, updatable = false)
-    private int idEdition;
+    private short idEdition;
 
     @ManyToOne
     @JoinColumn(name="EDICION_ID")
@@ -46,7 +46,7 @@ public class Stage {
     public Stage() {
     }
 
-    public Stage(Long idStage, String origin, double longitude, String destination, int idEdition, String typeStage) {
+    public Stage(Long idStage, String origin, double longitude, String destination, short idEdition, String typeStage) {
         this.idStage = idStage;
         this.origin = origin;
         this.longitude = longitude;
