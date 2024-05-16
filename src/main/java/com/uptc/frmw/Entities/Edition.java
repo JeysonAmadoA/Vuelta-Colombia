@@ -47,7 +47,7 @@ public class Edition {
     @Override
     public String toString() {
         return "Edition{" +
-                "anio=" + anio +
+                "año=" + anio +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';

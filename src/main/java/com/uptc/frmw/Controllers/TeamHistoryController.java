@@ -1,58 +1,80 @@
 package com.uptc.frmw.Controllers;
 
 
-import com.uptc.frmw.Entities.Stage;
 import com.uptc.frmw.Entities.TeamHistory;
 import com.uptc.frmw.Services.TeamHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
+
+import static com.uptc.frmw.Utilities.Constants.TEAM_HISTORY;
 
 @RestController
 @RequestMapping("/teamHistory")
-public class TeamHistoryController {
+public class TeamHistoryController extends BaseController {
 
     @Autowired
     private TeamHistoryService teamHistoryService;
 
     @GetMapping
-    public List<TeamHistory> getAll(){
-        return teamHistoryService.findAll();
+    public ResponseEntity<Map<String, Object>> getAll(){
+        Map<String, Object> response = getFindResponse(TEAM_HISTORY, teamHistoryService.findAll());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{idTeamHistory}")
-    public TeamHistory getById(@PathVariable long idTeamHistory){
-        return teamHistoryService.findById(idTeamHistory);
+    public ResponseEntity<Map<String, Object>> getById(@PathVariable long idTeamHistory){
+        Map<String, Object> response = getFindResponse(TEAM_HISTORY,
+                teamHistoryService.findById(idTeamHistory), idTeamHistory);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/findByTeam")
-    public List<TeamHistory> getByTeamId(@RequestParam long teamId){
-        return teamHistoryService.findTeamHistoryByTeamId(teamId);
+    public ResponseEntity<Map<String, Object>> getByTeamId(@RequestParam long teamId){
+        Map<String, Object> response = getFindResponse(TEAM_HISTORY,
+                teamHistoryService.findTeamHistoryByTeamId(teamId));
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/findByRunner")
-    public List<TeamHistory> getByRunnerId(@RequestParam long runnerId){
-        return teamHistoryService.findTeamHistoryByRunnerId(runnerId);
+    public ResponseEntity<Map<String, Object>> getByRunnerId(@RequestParam long runnerId){
+        Map<String, Object> response = getFindResponse(TEAM_HISTORY,
+                teamHistoryService.findTeamHistoryByRunnerId(runnerId));
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/findByEdition")
-    public List<TeamHistory> getByEditionId(@RequestParam short editionId){
-        return teamHistoryService.findTeamHistoryByEditionId(editionId);
+    public ResponseEntity<Map<String, Object>> getByEditionId(@RequestParam short editionId){
+        Map<String, Object> response = getFindResponse(TEAM_HISTORY,
+                teamHistoryService.findTeamHistoryByEditionId(editionId));
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{idTeamHistory}")
-    public void deleteById(@PathVariable long idTeamHistory){
+    public ResponseEntity<Map<String, Object>> deleteById(@PathVariable long idTeamHistory){
         teamHistoryService.deleteById(idTeamHistory);
+        Map<String, Object> response = getDeleteResponse(TEAM_HISTORY, idTeamHistory);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public TeamHistory saveTeamHistory(@RequestBody TeamHistory teamHistory){
-        return teamHistoryService.saveTeamHistory(teamHistory);
+    public ResponseEntity<Map<String, Object>> saveTeamHistory(@RequestBody TeamHistory teamHistory){
+        Map<String, Object> response = getSaveResponse(TEAM_HISTORY, teamHistoryService.saveTeamHistory(teamHistory));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    public TeamHistory updateTeamHistory(@PathVariable long id, @RequestBody TeamHistory teamHistory){
-        return teamHistoryService.updateTeamHistory(id,teamHistory);
+    public ResponseEntity<Map<String, Object>> updateTeamHistory(@PathVariable long id, @RequestBody TeamHistory teamHistory){
+        Map<String, Object> response = getUpdateResponse(TEAM_HISTORY,
+                teamHistoryService.updateTeamHistory(id, teamHistory), id);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

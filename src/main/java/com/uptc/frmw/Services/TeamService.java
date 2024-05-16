@@ -1,8 +1,6 @@
 package com.uptc.frmw.Services;
 
-import com.uptc.frmw.Entities.Edition;
 import com.uptc.frmw.Entities.Team;
-import com.uptc.frmw.Repositories.TeamHistoryRepository;
 import com.uptc.frmw.Repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

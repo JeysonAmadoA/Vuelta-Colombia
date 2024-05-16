@@ -5,7 +5,6 @@ import com.uptc.frmw.Entities.Participant;
 import com.uptc.frmw.Entities.Sponsor;
 import com.uptc.frmw.Entities.Team;
 import com.uptc.frmw.Repositories.ParticipantRepository;
-import com.uptc.frmw.Repositories.TeamHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
