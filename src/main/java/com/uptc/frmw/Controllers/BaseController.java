@@ -17,7 +17,7 @@ public abstract class BaseController {
     }
 
     public static Map<String, Object> getFindResponse(String typeObject, Object findObject, Object id){
-        log.info("Se ha buscado {} : con ID: {}", typeObject, id);
+        log.info("Se ha buscado {} con ID: {}", typeObject, id);
         return getJsonResponse(findObject);
     }
 
@@ -33,7 +33,7 @@ public abstract class BaseController {
     }
 
     public static Map<String, Object> getUpdateResponse(String typeObject, Object updatedObject, Object id){
-        log.warn("Se ha actualizado {} : con ID: {}", typeObject, id);
+        log.warn("Se ha actualizado {} con ID: {}", typeObject, id);
         return getJsonResponse(updatedObject);
     }
 
